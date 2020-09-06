@@ -18,6 +18,7 @@ public:
             return result;
         }
         const set<int>& reachable_stations = reachable_lists_.at(start);
+
         const auto finish_pos = reachable_stations.lower_bound(finish);
         if (finish_pos != end(reachable_stations)) {
             result = min(result, abs(finish - *finish_pos));
