@@ -3,4 +3,4 @@ project(expresses)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(expresses main.cpp)
+add_executable(expresses expresses.cpp e_book.cpp)

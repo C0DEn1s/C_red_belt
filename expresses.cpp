@@ -33,7 +33,7 @@ private:
 };
 
 
-int main() {
+int main1() {
     RouteManager routes;
 
     int query_count;
