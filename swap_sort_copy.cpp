@@ -94,10 +94,10 @@ void TestReverseCopy() {
     delete[] source;
 }
 
-int main() {
+int main9() {
     TestRunner tr;
-    RUN_TEST(tr, TestSwap);
-    RUN_TEST(tr, TestSortPointers);
-    RUN_TEST(tr, TestReverseCopy);
+//    RUN_TEST(tr, TestSwap);
+//    RUN_TEST(tr, TestSortPointers);
+//    RUN_TEST(tr, TestReverseCopy);
     return 0;
 }
