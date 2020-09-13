@@ -73,8 +73,9 @@ void TestObjectPool() {
 
     pool.Deallocate(p3);
     pool.Deallocate(p1);
-    ASSERT_EQUAL(*pool.Allocate(), "third");
+
     ASSERT_EQUAL(*pool.Allocate(), "first");
+    ASSERT_EQUAL(*pool.Allocate(), "third");
 
     pool.Deallocate(p1);
 }
