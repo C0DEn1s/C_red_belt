@@ -1,70 +1,80 @@
 #ifndef EXPRESSES_SIMPLE_VECTOR_H
 #define EXPRESSES_SIMPLE_VECTOR_H
 
-#include <cstdlib>
 #include <algorithm>
+using namespace std;
 
-// Реализуйте шаблон SimpleVector
 template <typename T>
 class SimpleVector {
 public:
-    SimpleVector()
-            : data_begin(nullptr),
-              data_end(nullptr),
-              capacity(0),
-              size_(0) {}
+    SimpleVector() = default;
+    explicit SimpleVector(size_t size);
+    ~SimpleVector();
 
-    explicit SimpleVector(size_t size) : capacity(size), size_(size) {
-        data_begin = new T[size];
-        data_end = data_begin + size;
-    }
-    ~SimpleVector() {
-        delete[] data_begin;
-    }
+    T& operator[](size_t index);
 
-    T& operator[](size_t index) {
-        return data_begin[index];
-    }
+    T* begin();
+    T* end();
 
-    T* begin() {
-        return data_begin;
-    }
-    T* end() {
-        return data_end;
-    }
-
-    [[nodiscard]] size_t Size() const {
-        return size_;
-    }
-    [[nodiscard]] size_t Capacity() const {
-        return capacity;
-    }
-    void PushBack(const T& value) {
-        if (capacity == 0) {
-            data_begin = new T[1];
-            *data_begin = value;
-            data_end = data_begin + 1;
-            ++capacity;
-            size_ = 1;
-        } else {
-            if (capacity == size_) {
-                capacity *= 2;
-                T* new_data = new T[capacity];
-                std::copy(data_begin, data_end, new_data);
-                delete [] data_begin;
-                data_begin = new_data;
-            }
-            data_begin[size_] = value;
-            ++size_;
-            data_end = data_begin + size_;
-        }
-    }
+    size_t Size() const;
+    size_t Capacity() const;
+    void PushBack(const T& value);
 
 private:
-    T* data_begin;
-    T* data_end;
-    size_t capacity;
-    size_t size_;
+    T* data = nullptr;
+    size_t size = 0;
+    size_t capacity = 0;
 };
+
+template <typename T>
+SimpleVector<T>::SimpleVector(size_t size)
+        : data(new T[size])
+        , size(size)
+        , capacity(size)
+{
+}
+
+template <typename T>
+SimpleVector<T>::~SimpleVector() {
+    delete[] data;
+}
+
+template <typename T>
+T& SimpleVector<T>::operator[](size_t index) {
+    return data[index];
+}
+
+template <typename T>
+size_t SimpleVector<T>::Size() const {
+    return size;
+}
+
+template <typename T>
+size_t SimpleVector<T>::Capacity() const {
+    return capacity;
+}
+
+template <typename T>
+void SimpleVector<T>::PushBack(const T& value) {
+    if (size >= capacity) {
+        auto new_cap = capacity == 0 ? 1 : 2 * capacity;
+        auto new_data = new T[new_cap];
+        copy(begin(), end(), new_data);
+        delete[] data;
+        data = new_data;
+        capacity = new_cap;
+    }
+    data[size++] = value;
+}
+
+template <typename T>
+T* SimpleVector<T>::begin() {
+    return data;
+}
+
+template <typename T>
+T* SimpleVector<T>::end() {
+    return data + size;
+}
 
 #endif //EXPRESSES_SIMPLE_VECTOR_H
