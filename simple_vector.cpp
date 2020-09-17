@@ -36,7 +36,7 @@ void TestPushBack() {
     ASSERT(equal(begin(v), end(v), begin(expected)));
 }
 
-int main() {
+int main89() {
     TestRunner tr;
     RUN_TEST(tr, TestConstruction);
     RUN_TEST(tr, TestPushBack);
