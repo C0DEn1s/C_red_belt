@@ -11,12 +11,41 @@ public:
         Node* next = nullptr;
     };
 
-    ~LinkedList();
-
-    void PushFront(const T& value);
-    void InsertAfter(Node* node, const T& value);
-    void RemoveAfter(Node* node);
-    void PopFront();
+    ~LinkedList() {
+        while (head) {
+            PopFront();
+        }
+    }
+    void PushFront(const T& value) {
+        auto node = new Node{value};
+        node->next = head;
+        head = node;
+    }
+    void InsertAfter(Node* node, const T& value) {
+        if (node) {
+            auto new_node = new Node{value};
+            new_node->next = node->next;
+            node->next = new_node;
+        } else {
+            PushFront(value);
+        }
+    }
+    void RemoveAfter(Node* node) {
+        if (!node) {
+            PopFront();
+        } else if (node->next) {
+            auto removing_node = node->next;
+            node->next = removing_node->next;
+            delete removing_node;
+        }
+    }
+    void PopFront() {
+        if (head) {
+            Node* new_head = head->next;
+            delete head;
+            head = new_head;
+        }
+    }
 
     Node* GetHead() { return head; }
     const Node* GetHead() const { return head; }
