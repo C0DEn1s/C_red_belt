@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-void TestConstruction() {
+void TestConstruction1() {
     SimpleVector<int> empty;
     ASSERT_EQUAL(empty.Size(), 0u);
     ASSERT_EQUAL(empty.Capacity(), 0u);
@@ -23,7 +23,7 @@ void TestConstruction() {
     ASSERT_EQUAL(five_strings[2], "Hello");
 }
 
-void TestPushBack() {
+void TestPushBack1() {
     SimpleVector<int> v;
     for (int i = 10; i >= 1; --i) {
         v.PushBack(i);
@@ -38,7 +38,7 @@ void TestPushBack() {
 
 int main89() {
     TestRunner tr;
-    RUN_TEST(tr, TestConstruction);
-    RUN_TEST(tr, TestPushBack);
+    RUN_TEST(tr, TestConstruction1);
+    RUN_TEST(tr, TestPushBack1);
     return 0;
 }
