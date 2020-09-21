@@ -128,7 +128,7 @@ void TestPopFront() {
     ASSERT(list.GetHead() == nullptr);
 }
 
-int main() {
+int main42() {
     TestRunner tr;
     RUN_TEST(tr, TestPushFront);
     RUN_TEST(tr, TestInsertAfter);

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main() {
+int main34() {
     const int MAX_ATHLETES = 100'000;
     using Position = list<int>::iterator;
 
